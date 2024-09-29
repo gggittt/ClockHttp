@@ -7,15 +7,16 @@ using UnityEngine.Networking;
 
 namespace _Project.Core
 {
-public class UnityWebRequester : MonoBehaviour
+public class UnityWebRequester : MonoBehaviour, IWebRequester
 {
     string _requestResult;
 
+    [Sirenix.OdinInspector.Button]
     public string SendRequestTo( string url )
     {
-        Debug.Log( $"<color=cyan> {nameof( SendRequestTo )} </color>" );
-
         StartCoroutine( RequestToWebCoroutine( url, HandleAnswer ) );
+
+        Debug.Log( $"<color=cyan> {_requestResult} </color>" );
 
         return _requestResult;
     }
@@ -44,6 +45,5 @@ public class UnityWebRequester : MonoBehaviour
 
         yield return null;
     }
-
 }
 }
