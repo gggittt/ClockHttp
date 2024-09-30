@@ -31,7 +31,6 @@ public class ClockModel : MonoBehaviour
         DateTime moscowTime = utcDateTime.AddHours( MoscowTimeShift );
 
         Debug.Log( $"<color=cyan> {moscowTime} </color>" );
-        Debug.Log( $"<color=cyan> {TimeZoneInfo.Local} </color>" );
         return moscowTime;
     }
 
