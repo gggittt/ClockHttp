@@ -9,17 +9,36 @@ public class ClockModel : MonoBehaviour
 {
     [SerializeField] YandexTimeProvider _yandex;
     [SerializeField] NumericClockView _numericClockView;
+    [SerializeField] float _updatePeriodSeconds = 1;
 
     const int MoscowTimeShift = 3;
 
+    DateTime _cashedTime;
+
     void Awake( )
     {
-        DateTime moscowTime = GetMoscowTime();
+        // DateTime moscowTime = GetMoscowTime();
+        DateTime moscowTime = new DateTime( 2024, 9, 29, 23, 59, 49 );
+        _cashedTime = moscowTime;
 
+        UpdateUi( moscowTime );
+
+        InvokeRepeating( nameof( OnTimeChange ), 0f, _updatePeriodSeconds );
+    }
+
+
+    void OnTimeChange( )
+    {
+        _cashedTime = _cashedTime.AddSeconds( _updatePeriodSeconds );
+        UpdateUi( _cashedTime );
+    }
+
+    void UpdateUi( DateTime time )
+    {
         _numericClockView.Set(
-            hour: moscowTime.Hour.ToString(),
-            minute: moscowTime.Minute.ToString(),
-            second: moscowTime.Second.ToString()
+            hour: time.Hour.ToString(),
+            minute: time.Minute.ToString(),
+            second: time.Second.ToString()
         );
     }
 
@@ -35,4 +54,5 @@ public class ClockModel : MonoBehaviour
     }
 
 }
+
 }
