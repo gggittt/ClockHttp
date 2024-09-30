@@ -14,5 +14,13 @@ public static class StringExtensions
         return result;
     }
 
+    public static string AddZeroInFrontIfSingleDigit( this string self )
+    {
+        if ( self.Length == 1 )
+            self = "0" + self;
+
+        return self;
+    }
+
 }
 }

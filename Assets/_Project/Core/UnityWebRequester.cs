@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using Extensions.UnityTypes;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -13,7 +12,7 @@ public class UnityWebRequester : MonoBehaviour, IWebRequester
     [SerializeField] float _pauseBetweenAttemptInSeconds = 0.5f;
     string _requestResult;
 
-    [Sirenix.OdinInspector.Button]
+    [Button]
     public string SendRequestTo( string url )
     {
         StartCoroutine( RequestToWebCoroutine( url, HandleAnswer ) );

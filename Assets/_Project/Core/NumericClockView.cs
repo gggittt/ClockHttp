@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using _Project.Extensions;
+using TMPro;
 using UnityEngine;
 
 namespace _Project.Core
@@ -11,9 +12,9 @@ public class NumericClockView : MonoBehaviour
 
     public void Set( string hour, string minute, string second )
     {
-        _hour.text = hour;
-        _minute.text = minute;
-        _second.text = second;
+        _hour.text = hour.AddZeroInFrontIfSingleDigit();
+        _minute.text = minute.AddZeroInFrontIfSingleDigit();
+        _second.text = second.AddZeroInFrontIfSingleDigit();
     }
 }
 }
