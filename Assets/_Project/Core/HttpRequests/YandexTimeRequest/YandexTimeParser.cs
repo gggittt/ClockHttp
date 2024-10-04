@@ -18,7 +18,7 @@ public class YandexTimeParser : MonoBehaviour
     }
 
     [System.Serializable]
-    public class YandexJsonDateTime
+    class YandexJsonDateTime
     {
         public long Time;
         public object Clocks; //dummy for Yandex response mapping
