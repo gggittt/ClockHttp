@@ -14,7 +14,7 @@ public class ClockModel : MonoBehaviour
 
     [SerializeField] float _localUpdatePeriodSeconds = 1;
     [SerializeField] int _secondsBetweenServerSync = 3600;
-    [SerializeField] bool _mockWithoutHttpRequest;
+    [SerializeField] bool _mockWithoutHttpRequestAndWithoutServerSync;
 
     const int MoscowTimeShift = 3;
 
@@ -28,15 +28,24 @@ public class ClockModel : MonoBehaviour
 
     void Awake( )
     {
-        if ( _mockWithoutHttpRequest )
+        if ( _mockWithoutHttpRequestAndWithoutServerSync )
+        {
             _cashedTime = new DateTime( 2024, 9, 29, 23, 59, 55 );
+        }
         else
-            SetMoscowTime();
+        {
+            InvokeRepeating( nameof( SyncTimeWithWebRequest ), 0f, _secondsBetweenServerSync ); //also will be invoked instantly
+        }
 
         UpdateUi();
 
         InvokeRepeating( nameof( TickLocallyRepeating ), 0f, _localUpdatePeriodSeconds );
-        InvokeRepeating( nameof( SyncTimeWithWebRequest ), 0f, _secondsBetweenServerSync );
+    }
+
+    void SyncTimeWithWebRequest( )
+    {
+        SetMoscowTime();
+        UpdateUi();
     }
 
     void SetMoscowTime( )
@@ -44,10 +53,11 @@ public class ClockModel : MonoBehaviour
         _cashedTime = GetMoscowTime();
     }
 
-    void SyncTimeWithWebRequest( )
+    DateTime GetMoscowTime( )
     {
-        SetMoscowTime();
-        UpdateUi();
+        DateTime utcDateTime = _yandex.GetCurrentUtcDateTime();
+
+        return utcDateTime.AddHours( MoscowTimeShift );
     }
 
     void TickLocallyRepeating( )
@@ -73,16 +83,6 @@ public class ClockModel : MonoBehaviour
             minute: time.Minute.ToString(),
             second: time.Second.ToString()
         );
-    }
-
-    DateTime GetMoscowTime( )
-    {
-        DateTime utcDateTime = _yandex.GetCurrentUtcDateTime();
-
-        DateTime moscowTime = utcDateTime.AddHours( MoscowTimeShift );
-
-        Debug.Log( $"<color=cyan> {moscowTime} </color>" );
-        return moscowTime;
     }
 
     [Button]
