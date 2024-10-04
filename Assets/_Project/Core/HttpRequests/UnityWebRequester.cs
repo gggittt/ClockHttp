@@ -4,7 +4,7 @@ using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Networking;
 
-namespace _Project.Core
+namespace _Project.Core.HttpRequests
 {
 public class UnityWebRequester : MonoBehaviour, IWebRequester
 {

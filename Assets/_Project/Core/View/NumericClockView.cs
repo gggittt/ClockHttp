@@ -2,7 +2,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace _Project.Core
+namespace _Project.Core.View
 {
 public class NumericClockView : MonoBehaviour
 {

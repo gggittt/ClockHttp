@@ -1,5 +1,6 @@
 ﻿using System;
-using _Project.Core.YandexTimeRequest;
+using _Project.Core.HttpRequests.YandexTimeRequest;
+using _Project.Core.View;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -11,12 +12,12 @@ public class ClockModel : MonoBehaviour
     [SerializeField] NumericClockView _numericClockView;
     [SerializeField] AnalogClockView _analogClockView;
 
-    [SerializeField] float _updatePeriodSeconds = 1;
+    [SerializeField] float _localUpdatePeriodSeconds = 1;
+    [SerializeField] int _secondsBetweenServerSync = 3600;
     [SerializeField] bool _mockWithoutHttpRequest;
 
     const int MoscowTimeShift = 3;
 
-    // TimeSpan _cashedTime;
     DateTime _cashedTime;
 
     public void SetTime( DateTime newDateTime )
@@ -27,23 +28,36 @@ public class ClockModel : MonoBehaviour
 
     void Awake( )
     {
-        DateTime time;
-
         if ( _mockWithoutHttpRequest )
-            time = new DateTime( 2024, 9, 29, 23, 59, 55 );
+            _cashedTime = new DateTime( 2024, 9, 29, 23, 59, 55 );
         else
-            time = GetMoscowTime();
+            SetMoscowTime();
 
-        _cashedTime = time;
+        UpdateUi();
 
-        UpdateUi( time );
-
-        InvokeRepeating( nameof( UpdateTimeRepeating ), 0f, _updatePeriodSeconds );
+        InvokeRepeating( nameof( TickLocallyRepeating ), 0f, _localUpdatePeriodSeconds );
+        InvokeRepeating( nameof( SyncTimeWithWebRequest ), 0f, _secondsBetweenServerSync );
     }
 
-    void UpdateTimeRepeating( )
+    void SetMoscowTime( )
     {
-        _cashedTime = _cashedTime.AddSeconds( _updatePeriodSeconds );
+        _cashedTime = GetMoscowTime();
+    }
+
+    void SyncTimeWithWebRequest( )
+    {
+        SetMoscowTime();
+        UpdateUi();
+    }
+
+    void TickLocallyRepeating( )
+    {
+        _cashedTime = _cashedTime.AddSeconds( _localUpdatePeriodSeconds );
+        UpdateUi();
+    }
+
+    void UpdateUi( )
+    {
         UpdateUi( _cashedTime );
     }
 
@@ -61,7 +75,6 @@ public class ClockModel : MonoBehaviour
         );
     }
 
-    [Button]
     DateTime GetMoscowTime( )
     {
         DateTime utcDateTime = _yandex.GetCurrentUtcDateTime();
@@ -71,6 +84,11 @@ public class ClockModel : MonoBehaviour
         Debug.Log( $"<color=cyan> {moscowTime} </color>" );
         return moscowTime;
     }
-}
 
+    [Button]
+    void LogMoscowTime( )
+    {
+        Debug.Log( $"<color=cyan> {GetMoscowTime()} </color>" );
+    }
+}
 }

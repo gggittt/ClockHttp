@@ -2304,7 +2304,8 @@ MonoBehaviour:
   _yandex: {fileID: 1629875894}
   _numericClockView: {fileID: 586503768}
   _analogClockView: {fileID: 1803357816}
-  _updatePeriodSeconds: 1
+  _localUpdatePeriodSeconds: 1
+  _secondsBetweenServerSync: 3600
   _mockWithoutHttpRequest: 1
 --- !u!4 &1125503461
 Transform:

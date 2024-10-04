@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using System;
-using UnityEngine.Networking;
+﻿using UnityEngine.Networking;
 
-namespace Extensions.UnityTypes
+namespace _Project.Extensions.UnityTypes
 {
 public static class UnityWebRequestExtensions
 {

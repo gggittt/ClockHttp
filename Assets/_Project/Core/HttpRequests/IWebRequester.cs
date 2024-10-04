@@ -1,4 +1,4 @@
-namespace _Project.Core
+namespace _Project.Core.HttpRequests
 {
 public interface IWebRequester
 {

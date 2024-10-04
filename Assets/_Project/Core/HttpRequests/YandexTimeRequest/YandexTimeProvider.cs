@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace _Project.Core.YandexTimeRequest
+namespace _Project.Core.HttpRequests.YandexTimeRequest
 {
 class YandexTimeProvider : MonoBehaviour, ITimeProvider
 {

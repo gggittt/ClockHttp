@@ -2,7 +2,7 @@
 using Newtonsoft.Json;
 using UnityEngine;
 
-namespace _Project.Core.YandexTimeRequest
+namespace _Project.Core.HttpRequests.YandexTimeRequest
 {
 public class YandexTimeParser : MonoBehaviour
 {
