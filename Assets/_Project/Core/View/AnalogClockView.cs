@@ -50,14 +50,14 @@ public class AnalogClockView : MonoBehaviour
 
     void RotateHandsDoTweenSmooth( float hours, float minutes, float second )
     {
-        RotatePivot( _secondsPivot, second );
-        RotatePivot( _minutesPivot, minutes );
-        RotatePivot( _hoursPivot, hours );
+        RotateHandDoTweenSmooth( _secondsPivot, second );
+        RotateHandDoTweenSmooth( _minutesPivot, minutes );
+        RotateHandDoTweenSmooth( _hoursPivot, hours );
     }
 
-    void RotatePivot( Transform pivot, float amount )
+    void RotateHandDoTweenSmooth( Transform handPivot, float amount )
     {
-        pivot.DOLocalRotate( new Vector3( 0, 0, amount ), 1f ).SetEase( Ease.Linear );
+        handPivot.DOLocalRotate( new Vector3( 0, 0, amount ), 1f ).SetEase( Ease.Linear );
     }
 
 }
