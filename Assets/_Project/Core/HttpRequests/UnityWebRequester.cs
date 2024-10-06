@@ -11,6 +11,12 @@ public class UnityWebRequester : MonoBehaviour, IWebRequester
     [SerializeField] int _requestsAttemptAmount = 5;
     [SerializeField] float _pauseBetweenAttemptInSeconds = 0.5f;
     string _requestResult;
+    WaitForSeconds _requestToWebCoroutine;
+
+    void Awake( )
+    {
+        _requestToWebCoroutine = new WaitForSeconds( _pauseBetweenAttemptInSeconds );
+    }
 
     [Button]
     public string SendRequestTo( string url )
@@ -31,7 +37,6 @@ public class UnityWebRequester : MonoBehaviour, IWebRequester
     {
         int retryCount = 0;
         bool isSuccessful = false;
-        WaitForSeconds requestToWebCoroutine = new WaitForSeconds( _pauseBetweenAttemptInSeconds );
 
         while ( !isSuccessful && retryCount < _requestsAttemptAmount )
         {
@@ -49,7 +54,7 @@ public class UnityWebRequester : MonoBehaviour, IWebRequester
                 isSuccessful = true;
             }
 
-            yield return requestToWebCoroutine;
+            yield return _requestToWebCoroutine;
         }
 
         // yield return null;

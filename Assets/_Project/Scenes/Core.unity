@@ -468,7 +468,7 @@ GameObject:
   - component: {fileID: 257752657}
   - component: {fileID: 257752658}
   m_Layer: 0
-  m_Name: Pionter
+  m_Name: Pointer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1868,7 +1868,7 @@ GameObject:
   - component: {fileID: 888954269}
   - component: {fileID: 888954270}
   m_Layer: 0
-  m_Name: Pionter
+  m_Name: Pointer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2306,7 +2306,7 @@ MonoBehaviour:
   _analogClockView: {fileID: 1803357816}
   _localUpdatePeriodSeconds: 1
   _secondsBetweenServerSync: 3600
-  _mockWithoutHttpRequest: 1
+  _mockWithoutHttpRequestAndWithoutServerSync: 0
 --- !u!4 &1125503461
 Transform:
   m_ObjectHideFlags: 0
@@ -3901,7 +3901,7 @@ GameObject:
   - component: {fileID: 1796107131}
   - component: {fileID: 1796107132}
   m_Layer: 0
-  m_Name: Pionter
+  m_Name: Pointer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
