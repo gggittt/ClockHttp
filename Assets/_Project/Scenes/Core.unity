@@ -752,7 +752,7 @@ GameObject:
   m_Component:
   - component: {fileID: 502795962}
   m_Layer: 0
-  m_Name: HourPionterPivot
+  m_Name: HourPointerPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2398,7 +2398,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1132920035}
   m_Layer: 0
-  m_Name: MinutePionterPivot
+  m_Name: MinutePointerPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3748,7 +3748,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1636960909}
   m_Layer: 0
-  m_Name: SecondPionterPivot
+  m_Name: SecondPointerPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4180,6 +4180,7 @@ MonoBehaviour:
   _hoursPivot: {fileID: 502795962}
   _minutesPivot: {fileID: 1132920035}
   _secondsPivot: {fileID: 1636960909}
+  _smoothHandMove: 0
 --- !u!1 &1887145330
 GameObject:
   m_ObjectHideFlags: 0
